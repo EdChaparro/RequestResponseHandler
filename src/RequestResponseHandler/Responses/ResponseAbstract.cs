@@ -6,7 +6,7 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
     {
         IRequest OriginalRequest { get; }
 
-        ErrorInfo? ErrorInfo { get; }
+        ErrorInfo? ErrorInfo { get; set; }
 
         bool IsSuccessful { get; }
     }
@@ -21,7 +21,7 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
 
         public IRequest OriginalRequest { get; }
 
-        public ErrorInfo? ErrorInfo { get; }
+        public ErrorInfo? ErrorInfo { get; set; }
 
         public bool IsSuccessful => ErrorInfo != null;
     }

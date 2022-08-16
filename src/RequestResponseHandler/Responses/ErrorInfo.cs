@@ -2,13 +2,13 @@
 {
     public class ErrorInfo
     {
-        public ErrorInfo(string id, string message)
+        public ErrorInfo(string errorId, string message)
         {
-            Id = id;
+            ErrorId = errorId;
             Message = message;
         }
 
-        public string Id { get; }
+        public string ErrorId { get; }
         public string Message { get; }
     }
 }
