@@ -11,9 +11,9 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
         bool IsSuccessful { get; }
     }
 
-    public class ResponseAbstract : IResponse
+    public abstract class ResponseAbstract : IResponse
     {
-        public ResponseAbstract(IRequest originalRequest, ErrorInfo? errorInfo)
+        protected ResponseAbstract(IRequest originalRequest, ErrorInfo? errorInfo = null)
         {
             OriginalRequest = originalRequest;
             ErrorInfo = errorInfo;

@@ -6,14 +6,15 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
     public interface IRequestHandler<in TRequest, out TResponse>
         where TRequest : class, IRequest
-        where TResponse : class, IResponse, new()
+        where TResponse : class, IResponse
     {
         TResponse Handle(TRequest request);
     }
 
-    public abstract class RequestHandlerAbstract<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public abstract class RequestHandlerAbstract<TRequest, TResponse>
+        : IRequestHandler<TRequest, TResponse>
         where TRequest : class, IRequest
-        where TResponse : class, IResponse, new()
+        where TResponse : class, IResponse
     {
         public TResponse Handle(TRequest request)
         {
@@ -43,10 +44,17 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
             var errorId = e == null ? "Unknown" : e.GetType().Name;
             var message = e == null ? "Unknown Error" : e.Message;
 
-            return new TResponse
+            var response = Activator.CreateInstance
+                    (typeof(TResponse), request, new ErrorInfo(errorId, message))
+                as TResponse;
+
+            if (response == null)   //This should never happen
             {
-                ErrorInfo = new ErrorInfo(errorId, message)
-            };
+                throw new InvalidOperationException
+                    ($"Unable to instantiate Response for type {typeof(TResponse).FullName}");
+            }
+
+            return response;
         }
     }
 }
