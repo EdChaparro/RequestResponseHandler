@@ -4,7 +4,12 @@ using IntrepidProducts.RequestResponseHandler.Responses;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
-    public interface IRequestHandler<in TRequest, out TResponse>
+    public interface IRequestHandler
+    {
+        IResponse Handle(IRequest request);
+    }
+
+    public interface IRequestHandler<in TRequest, out TResponse> : IRequestHandler
         where TRequest : class, IRequest
         where TResponse : class, IResponse
     {
@@ -16,6 +21,19 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
         where TRequest : class, IRequest
         where TResponse : class, IResponse
     {
+        public IResponse Handle(IRequest request)
+        {
+            var concreteRequest = request as TRequest;
+
+            if (concreteRequest == null)
+            {
+                throw new ArgumentException
+                    ($"Invalid request passed to Handle function, {request}");
+            }
+
+            return Handle(concreteRequest);
+        }
+
         public TResponse Handle(TRequest request)
         {
             try
