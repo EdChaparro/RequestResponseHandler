@@ -6,14 +6,14 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
     {
         IRequest OriginalRequest { get; }
 
-        ErrorInfo? ErrorInfo { get; }
+        ErrorInfo? ErrorInfo { get; set; }
 
         bool IsSuccessful { get; }
     }
 
-    public class ResponseAbstract : IResponse
+    public abstract class ResponseAbstract : IResponse
     {
-        public ResponseAbstract(IRequest originalRequest, ErrorInfo? errorInfo)
+        protected ResponseAbstract(IRequest originalRequest, ErrorInfo? errorInfo = null)
         {
             OriginalRequest = originalRequest;
             ErrorInfo = errorInfo;
@@ -21,7 +21,7 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
 
         public IRequest OriginalRequest { get; }
 
-        public ErrorInfo? ErrorInfo { get; }
+        public ErrorInfo? ErrorInfo { get; set; }
 
         public bool IsSuccessful => ErrorInfo != null;
     }

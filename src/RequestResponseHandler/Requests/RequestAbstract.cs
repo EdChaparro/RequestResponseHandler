@@ -15,5 +15,10 @@ namespace IntrepidProducts.RequestResponseHandler.Requests
         }
 
         public Guid Id { get; }
+
+        public override string ToString()
+        {
+            return $"{Id}, {GetType().Name}";
+        }
     }
 }
