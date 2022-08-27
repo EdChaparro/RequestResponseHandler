@@ -8,9 +8,9 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
         ResponseBlock Process(RequestBlock requestBlock);
     }
 
-    public class RequestHandlerProcess : IRequestHandlerProcessor
+    public class RequestHandlerProcessor : IRequestHandlerProcessor
     {
-        public RequestHandlerProcess(IRequestHandlerRegistry requestHandlerRegistry)
+        public RequestHandlerProcessor(IRequestHandlerRegistry requestHandlerRegistry)
         {
             _requestHandlerRegistry = requestHandlerRegistry;
         }
