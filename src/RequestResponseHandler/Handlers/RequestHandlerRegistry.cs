@@ -5,11 +5,25 @@ using System.Reflection;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
+    public class RequestHandlerFoundEvent : EventArgs
+    {
+        public RequestHandlerFoundEvent(Type requestType, Type requestHandlerType)
+        {
+            RequestType = requestType;
+            RequestHandlerType = requestHandlerType;
+        }
+
+        public Type RequestType { get; }
+        public Type RequestHandlerType { get; }
+    }
+
     public interface IRequestHandlerRegistry
     {
         int Register(params Type[] requestHandlerTypes);
         int Register(params Assembly[] assemblies);
         Type? GetRequestHandlerTypeFor(Type requestType);
+
+        event EventHandler<RequestHandlerFoundEvent> RequestHandlerFoundEvent;
     }
 
     public class RequestHandlerRegistry : IRequestHandlerRegistry
@@ -23,6 +37,13 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
              _requestHandlers.TryGetValue(requestType, out var requestHandlerType);
 
             return requestHandlerType;
+        }
+
+        public event EventHandler<RequestHandlerFoundEvent>? RequestHandlerFoundEvent;
+
+        private void OnRequestHandlerEventFound(RequestHandlerFoundEvent e)
+        {
+            RequestHandlerFoundEvent?.Invoke(this, e);
         }
 
         public int Register(params Type[] requestHandlerTypes)
@@ -48,6 +69,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
                 _requestHandlers[requestType] = requestHandlerType;
                 registerCount++;
+                OnRequestHandlerEventFound(new RequestHandlerFoundEvent(requestType, requestHandlerType));
             }
 
             return registerCount;

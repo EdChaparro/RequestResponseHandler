@@ -17,7 +17,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest.RequestHandlerTestObjects
         public int Number1 { get; set; }
         public int Number2 { get; set; }
 
-        public Func<int, int, long> NumberOperation;
+        public Func<int, int, long> NumberOperation { get; set; }
     }
 
     public class NumericOperationResponse : ResponseAbstract
