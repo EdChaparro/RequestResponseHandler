@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
-using IntrepidProducts.RequestResponseHandlerTest.RequestHandlerTestObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

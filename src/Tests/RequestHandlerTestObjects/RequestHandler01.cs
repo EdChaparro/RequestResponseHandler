@@ -1,9 +1,8 @@
-﻿
-using IntrepidProducts.RequestResponseHandler.Handlers;
+﻿using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
-namespace IntrepidProducts.RequestResponseHandlerTest.RequestHandlerTestObjects
+namespace IntrepidProducts.RequestHandlerTestObjects
 {
     public class Request01 : RequestAbstract
     {}

@@ -1,5 +1,5 @@
+using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestResponseHandler.Handlers;
-using IntrepidProducts.RequestResponseHandlerTest.RequestHandlerTestObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntrepidProducts.RequestResponseHandlerTest
@@ -50,7 +50,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest
         {
             var registry = new RequestHandlerRegistry();
 
-            Assert.AreEqual(3, registry.Register(GetType().Assembly));
+            Assert.AreEqual(3, registry.Register(typeof(Request01).Assembly));
             Assert.AreEqual(3, registry.RequestHandlerCount);
         }
 
