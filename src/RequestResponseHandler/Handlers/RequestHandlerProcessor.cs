@@ -16,7 +16,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
         protected override IRequestHandler? Resolve(Type requestHandlerType)
         {
-            throw new NotImplementedException();
+            return _iocContainer.Resolve<IRequestHandler>(requestHandlerType.FullName);
         }
     }
 }
