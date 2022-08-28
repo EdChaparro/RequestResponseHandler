@@ -12,7 +12,7 @@ namespace IntrepidProducts.RequestResponseHandler.Requests
 
     public class RequestBlock
     {
-        protected RequestBlock()
+        public RequestBlock()
         {
             Id = Guid.NewGuid();
         }
