@@ -1,6 +1,5 @@
-using System;
+using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestResponseHandler.Handlers;
-using IntrepidProducts.RequestResponseHandlerTest.RequestHandlerTestObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntrepidProducts.RequestResponseHandlerTest
@@ -19,6 +18,24 @@ namespace IntrepidProducts.RequestResponseHandlerTest
         }
 
         [TestMethod]
+        public void ShouldRaiseEventOnRegistration()
+        {
+            var registry = new RequestHandlerRegistry();
+
+            var eventCount = 0;
+
+            registry.RequestHandlerFoundEvent += (sender, e) =>
+            {
+                eventCount++;
+                Assert.AreEqual(typeof(Request01), e.RequestType);
+                Assert.AreEqual(typeof(RequestHandler01), e.RequestHandlerType);
+            };
+
+            Assert.AreEqual(1, registry.Register(typeof(RequestHandler01)));
+            Assert.AreEqual(1, eventCount);
+        }
+
+        [TestMethod]
         public void ShouldRegisterMultipleRequestHandlers()
         {
             var registry = new RequestHandlerRegistry();
@@ -33,8 +50,8 @@ namespace IntrepidProducts.RequestResponseHandlerTest
         {
             var registry = new RequestHandlerRegistry();
 
-            Assert.AreEqual(2, registry.Register(GetType().Assembly));
-            Assert.AreEqual(2, registry.RequestHandlerCount);
+            Assert.AreEqual(3, registry.Register(typeof(Request01).Assembly));
+            Assert.AreEqual(3, registry.RequestHandlerCount);
         }
 
 

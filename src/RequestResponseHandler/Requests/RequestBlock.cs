@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IntrepidProducts.RequestResponseHandler.Requests
 {
@@ -11,7 +12,7 @@ namespace IntrepidProducts.RequestResponseHandler.Requests
 
     public class RequestBlock
     {
-        protected RequestBlock()
+        public RequestBlock()
         {
             Id = Guid.NewGuid();
         }
@@ -21,6 +22,9 @@ namespace IntrepidProducts.RequestResponseHandler.Requests
         public ExecutionStrategy ExecutionStrategy { get; set; } = ExecutionStrategy.Sequential;
 
         private readonly IList<IRequest> _requests = new List<IRequest>();
+
+        public IEnumerable<IRequest> Requests => _requests.ToList();
+
         public void Add(IRequest request)
         {
             _requests.Add(request);

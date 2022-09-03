@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using IntrepidProducts.RequestResponseHandler.Requests;
 
 namespace IntrepidProducts.RequestResponseHandler.Responses
@@ -11,10 +12,13 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
         }
         public RequestBlock OriginalRequestBlock { get; }
 
-        private readonly IList<IResponse> _responses = new List<IResponse>();
-        public void Add(IResponse response)
+        private readonly List<IResponse> _responses = new List<IResponse>();
+
+        public IEnumerable<IResponse> Responses => _responses.ToList();
+
+        public void Add(params IResponse[] responses)
         {
-            _responses.Add(response);
+            _responses.AddRange(responses);
         }
     }
 }
