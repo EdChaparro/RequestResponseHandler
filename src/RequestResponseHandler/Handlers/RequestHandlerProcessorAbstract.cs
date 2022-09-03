@@ -26,11 +26,18 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
             var requestHandlers = GetRequestHandlers(requestBlock.Requests);
 
-            //TODO: Implement parallel execution
+            switch (requestBlock.ExecutionStrategy)
+            {
+                case ExecutionStrategy.Sequential:
+                    responseBlock.Add(ExecuteSerially(requestHandlers).ToArray());
+                    break;
 
-            var responses = ExecuteSerially(requestHandlers);
-
-            responseBlock.Add(responses.ToArray());
+                case ExecutionStrategy.Parallel:
+                    responseBlock.Add(ExecuteInParallel(requestHandlers).ToArray());
+                    break;
+                default:
+                    throw new ArgumentException($"Unknown Execution Strategy, {requestBlock.ExecutionStrategy}");
+            }
 
             return responseBlock;
         }
@@ -42,13 +49,26 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
             foreach (var rh in requestHandlers)
             {
+
+                var request = rh.request;
+                request.StartUtcTime = DateTime.UtcNow;
                 var response = rh.requestHandler.Handle(rh.request);
 
+                response.CompletedUtcTime = DateTime.UtcNow;
                 responses.Add(response);
             }
 
             return responses;
         }
+
+        private IEnumerable<IResponse> ExecuteInParallel
+            (IEnumerable<(IRequest request, IRequestHandler requestHandler)> requestHandlers)
+        {
+            //TODO: Implement parallel execution
+
+            throw new NotImplementedException();
+        }
+
 
         private IEnumerable<(IRequest request, IRequestHandler requestHandler)>
             GetRequestHandlers(IEnumerable<IRequest> requests)

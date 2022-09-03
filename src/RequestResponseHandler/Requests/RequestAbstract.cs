@@ -4,7 +4,8 @@ namespace IntrepidProducts.RequestResponseHandler.Requests
 {
     public interface IRequest
     {
-        public Guid Id { get; }
+        Guid Id { get; }
+        DateTime StartUtcTime { get; set; }
     }
 
     public abstract class RequestAbstract : IRequest
@@ -15,6 +16,8 @@ namespace IntrepidProducts.RequestResponseHandler.Requests
         }
 
         public Guid Id { get; }
+
+        public DateTime StartUtcTime { get; set; }
 
         public override string ToString()
         {
