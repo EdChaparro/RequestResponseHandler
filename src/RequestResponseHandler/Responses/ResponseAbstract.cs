@@ -23,6 +23,6 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
 
         public ErrorInfo? ErrorInfo { get; set; }
 
-        public bool IsSuccessful => ErrorInfo != null;
+        public bool IsSuccessful => ErrorInfo == null;
     }
 }

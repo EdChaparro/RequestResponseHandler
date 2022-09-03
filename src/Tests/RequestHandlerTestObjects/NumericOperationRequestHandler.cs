@@ -7,10 +7,8 @@ namespace IntrepidProducts.RequestHandlerTestObjects
 {
     public class NumericOperationRequest : RequestAbstract
     {
-        public NumericOperationRequest(int nbr1, int  nbr2)
+        public NumericOperationRequest()
         {
-            Number1 = nbr1;
-            Number2 = nbr2;
             NumberOperation = (n1, n2) => n1 + n2;
         }
 
