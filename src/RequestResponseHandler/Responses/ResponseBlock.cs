@@ -12,13 +12,13 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
         }
         public RequestBlock OriginalRequestBlock { get; }
 
-        private readonly IList<IResponse> _responses = new List<IResponse>();
+        private readonly List<IResponse> _responses = new List<IResponse>();
 
         public IEnumerable<IResponse> Responses => _responses.ToList();
 
-        public void Add(IResponse response)
+        public void Add(params IResponse[] responses)
         {
-            _responses.Add(response);
+            _responses.AddRange(responses);
         }
     }
 }

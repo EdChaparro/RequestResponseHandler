@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
@@ -25,14 +26,34 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
             var requestHandlers = GetRequestHandlers(requestBlock.Requests);
 
-            //TODO: Finish me
+            //TODO: Implement parallel execution
+
+            var responses = ExecuteSerially(requestHandlers);
+
+            responseBlock.Add(responses.ToArray());
 
             return responseBlock;
         }
 
-        private IEnumerable<IRequestHandler> GetRequestHandlers(IEnumerable<IRequest> requests)
+        private IEnumerable<IResponse> ExecuteSerially
+            (IEnumerable<(IRequest request, IRequestHandler requestHandler)> requestHandlers)
         {
-            var requestHandlers = new List<IRequestHandler>();
+            var responses = new List<IResponse>();
+
+            foreach (var rh in requestHandlers)
+            {
+                var response = rh.requestHandler.Handle(rh.request);
+
+                responses.Add(response);
+            }
+
+            return responses;
+        }
+
+        private IEnumerable<(IRequest request, IRequestHandler requestHandler)>
+            GetRequestHandlers(IEnumerable<IRequest> requests)
+        {
+            var requestHandlers = new List<(IRequest request, IRequestHandler requestHandler)>();
 
             foreach (var request in requests)
             {
@@ -51,7 +72,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
                     throw new RequestHandlerNotResolvableException(request.GetType());
                 }
 
-                requestHandlers.Add(requestHandler);
+                requestHandlers.Add((request, requestHandler));
             }
 
             return requestHandlers;

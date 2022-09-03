@@ -1,5 +1,5 @@
-using System;
-using System.Collections.Generic;
+using System.Linq;
+using IntrepidProducts.IocContainer;
 using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
@@ -8,106 +8,93 @@ using Moq;
 
 namespace IntrepidProducts.RequestResponseHandlerTest
 {
-    public class MockRequestHandlerProcessor : RequestHandlerProcessorAbstract
-    {
-        public MockRequestHandlerProcessor
-            (IRequestHandlerRegistry requestHandlerRegistry,
-                IRequestHandler? mockHandler)
-            : base(requestHandlerRegistry)
-        {
-            MockRequestHandler = mockHandler;
-        }
-
-        public IList<Type> RequestHandlerToResolve { get; } = new List<Type>();
-
-        protected override IRequestHandler? Resolve(Type requestHandlerType)
-        {
-            RequestHandlerToResolve.Add(requestHandlerType);
-            return MockRequestHandler;
-        }
-
-        private IRequestHandler? MockRequestHandler { get; }
-    }
-
     [TestClass]
     public class RequestHandlerProcessorTest
     {
         [TestMethod]
-        public void ShouldTryToResolveRegisteredRequestHandlers()
+        public void ShouldExecuteRequestHandlerLinkedToRequestType()
         {
-            var mockRegistry = new Mock<IRequestHandlerRegistry>();
-            mockRegistry.Setup
-                    (x => x.GetRequestHandlerTypeFor(It.IsAny<Type>()))
-                .Returns(typeof(RequestHandler01));
-
-            var mockProcessor = new MockRequestHandlerProcessor
-                (mockRegistry.Object, new RequestHandler01());
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
             var rb = new RequestBlock();
             rb.Add(new Request01());
 
-            mockProcessor.Process(rb);
+            var responseBlock = processor.Process(rb);
+            Assert.IsNotNull(responseBlock);
 
-            mockRegistry.Verify
-            (x =>
-                x.GetRequestHandlerTypeFor(It.IsAny<Type>()), Times.Once);
+            var responses = responseBlock.Responses.ToList();
+            Assert.AreEqual(1, responses.Count);
+            var response = responses[0] as RequestHandlerTypeResponse;
+            Assert.IsNotNull(response);
+
+            Assert.AreEqual(rb.Requests.First(), response.OriginalRequest);
+            Assert.AreEqual(typeof(RequestHandler01), response.RequestHandlerType);
         }
 
         [TestMethod]
-        public void ShouldTryToResolveAllRequestHandlersInRequestBlock()
+        public void ShouldExecuteMultipleRequestHandlers()
         {
-            var mockRegistry = new Mock<IRequestHandlerRegistry>();
-            mockRegistry.Setup
-                    (x => x.GetRequestHandlerTypeFor(It.IsAny<Type>()))
-                .Returns(typeof(RequestHandler01));
-
-            var mockProcessor = new MockRequestHandlerProcessor
-                (mockRegistry.Object, new RequestHandler01());
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
             var rb = new RequestBlock();
             rb.Add(new Request01());
             rb.Add(new Request02());
 
-            mockProcessor.Process(rb);
+            var responseBlock = processor.Process(rb);
+            Assert.IsNotNull(responseBlock);
 
-            mockRegistry.Verify
-            (x =>
-                x.GetRequestHandlerTypeFor(It.IsAny<Type>()), Times.Exactly(2));
+            var responses = responseBlock.Responses.ToList();
+            Assert.AreEqual(2, responses.Count);
+            var response1 = responses[0] as RequestHandlerTypeResponse;
+            var response2 = responses[1] as RequestHandlerTypeResponse;
+            Assert.IsNotNull(response1);
+            Assert.IsNotNull(response2);
+
+            Assert.AreEqual(rb.Requests.ToList()[0], response1.OriginalRequest);
+            Assert.AreEqual(rb.Requests.ToList()[1], response2.OriginalRequest);
+            Assert.AreEqual(typeof(RequestHandler01), response1.RequestHandlerType);
+            Assert.AreEqual(typeof(RequestHandler02), response2.RequestHandlerType);
         }
 
         [TestMethod]
         [ExpectedException(typeof(RequestHandlerNotResolvableException))]
         public void ShouldThrowExceptionWhenRequestHandleCannotBeResolved()
         {
-            var mockRegistry = new Mock<IRequestHandlerRegistry>();
-            mockRegistry.Setup
-                    (x => x.GetRequestHandlerTypeFor(It.IsAny<Type>()))
-                .Returns(typeof(RequestHandler01));
+            var mockIocContainer = new Mock<IIocContainer>();
 
-            var mockProcessor = new MockRequestHandlerProcessor
-                (mockRegistry.Object, null);
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+
+            var registry = iocContainer.Resolve<IRequestHandlerRegistry>();
+
+            var processor = new RequestHandlerProcessor(registry, mockIocContainer.Object);
 
             var rb = new RequestBlock();
             rb.Add(new Request01());
 
-            mockProcessor.Process(rb);
+            processor.Process(rb);
         }
 
         [TestMethod]
         [ExpectedException(typeof(RequestHandlerNotRegistered))]
         public void ShouldThrowExceptionWhenRequestHandleNotRegistered()
         {
-            var mockRegistry = new Mock<IRequestHandlerRegistry>();
-            mockRegistry.Setup
-                    (x => x.GetRequestHandlerTypeFor(It.IsAny<Type>()))
-                .Returns<IRequestHandler>(null);
-
-            var mockProcessor = new MockRequestHandlerProcessor(mockRegistry.Object, null);
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
             var rb = new RequestBlock();
-            rb.Add(new Request01());
+            rb.Add(new RequestWithNoRequestHandler());
 
-            mockProcessor.Process(rb);
+            processor.Process(rb);
         }
     }
 }
