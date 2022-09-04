@@ -1,5 +1,6 @@
 using IntrepidProducts.RequestHandlerTestObjects.Requests;
 using IntrepidProducts.RequestResponseHandler.Handlers;
+using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntrepidProducts.RequestResponseHandlerTest

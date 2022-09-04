@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
@@ -93,7 +94,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
                 if (requestHandlerType == null)
                 {
-                    throw new RequestHandlerNotRegistered(request.GetType());
+                    throw new RequestHandlerNotRegisteredException(request.GetType());
                 }
 
                 var requestHandler = Resolve(requestHandlerType);

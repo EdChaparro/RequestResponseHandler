@@ -4,6 +4,7 @@ using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestHandlerTestObjects.Requests;
 using IntrepidProducts.RequestHandlerTestObjects.Responses;
 using IntrepidProducts.RequestResponseHandler.Handlers;
+using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -206,7 +207,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(RequestHandlerNotRegistered))]
+        [ExpectedException(typeof(RequestHandlerNotRegisteredException))]
         public void ShouldThrowExceptionWhenRequestHandleNotRegistered()
         {
             var bootStrapper = new Bootstrapper();

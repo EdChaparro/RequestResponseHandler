@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IntrepidProducts.RequestResponseHandler.Handlers
+namespace IntrepidProducts.RequestResponseHandler.Handlers.Exceptions
 {
     public class DuplicateRequestHandlerstException : Exception
     {
