@@ -50,12 +50,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
             foreach (var rh in requestHandlers)
             {
-
-                var request = rh.request;
-                request.StartUtcTime = DateTime.UtcNow;
                 var response = rh.requestHandler.Handle(rh.request);
-
-                response.CompletedUtcTime = DateTime.UtcNow;
                 responses.Add(response);
             }
 
@@ -72,8 +67,6 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
             foreach (var rh in requestHandlers)
             {
                 var request = rh.request;
-                request.StartUtcTime = DateTime.UtcNow;
-
                 tasks.Add(rh.requestHandler.HandleAsync(request));
             }
 
@@ -82,7 +75,6 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
             foreach (var task in tasks)
             {
                 var response = task.Result;
-                response.CompletedUtcTime = DateTime.UtcNow;
                 responses.Add(response);
             }
 

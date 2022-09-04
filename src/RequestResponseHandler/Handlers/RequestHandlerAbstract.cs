@@ -51,9 +51,13 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
         {
             try
             {
+                request.StartUtcTime = DateTime.UtcNow;
+
                 BeforeHandle(request);
                 var response = DoHandle(request);
                 OnSuccessfulCompletion(request, response);
+
+                response.CompletedUtcTime = DateTime.UtcNow;
                 return response;
             }
             catch (Exception e)

@@ -40,6 +40,8 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             Assert.AreEqual(rb.Requests.First(), response.OriginalRequest);
             Assert.AreEqual(typeof(RequestHandler01), response.RequestHandlerType);
             Assert.IsTrue(response.IsSuccessful);
+
+            Assert.IsTrue(rb.Requests.First().StartUtcTime < response.CompletedUtcTime);
         }
         #endregion
 
@@ -122,6 +124,35 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             Assert.AreEqual("Attempted to divide by zero.", errorInfo.Message);
         }
         #endregion
+
+        [TestMethod]
+        public void ShouldExecuteRequestHandlersInParallel()
+        {
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
+
+            var rb = new RequestBlock { ExecutionStrategy = ExecutionStrategy.Parallel };
+            rb.Add(new CalculateFibonacciSequenceRequest { NumberOfElements = 5000000 });
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+
+            var responseBlock = processor.Process(rb);
+            Assert.IsNotNull(responseBlock);
+
+            Assert.AreEqual(6, responseBlock.Responses.Count());
+
+            var responses = responseBlock.Responses
+                .OrderByDescending(x => x.CompletedUtcTime)
+                .ToList();
+
+            var lastResponseToFinish = responses[0];    //Should be more CPU intensive request handler
+            Assert.AreEqual(typeof(CalculateFibonacciSequenceResponse), lastResponseToFinish.GetType());
+        }
 
         [TestMethod]
         [ExpectedException(typeof(RequestHandlerNotResolvableException))]
