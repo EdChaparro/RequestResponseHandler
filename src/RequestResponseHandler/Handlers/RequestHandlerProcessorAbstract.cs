@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
@@ -68,6 +69,11 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
             throw new NotImplementedException();
         }
+
+        //private async Task<IResponse> ExecuteRequestHandlerAsync(IRequest request, IRequestHandler requestHandler)
+        //{
+
+        //}
 
 
         private IEnumerable<(IRequest request, IRequestHandler requestHandler)>

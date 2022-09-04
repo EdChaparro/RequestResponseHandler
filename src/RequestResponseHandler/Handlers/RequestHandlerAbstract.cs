@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reflection;
+using System.Threading.Tasks;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
@@ -8,13 +8,15 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
     public interface IRequestHandler
     {
         IResponse Handle(IRequest request);
+        Task<IResponse> HandleAsync(IRequest request);
     }
 
-    public interface IRequestHandler<in TRequest, out TResponse> : IRequestHandler
+    public interface IRequestHandler<in TRequest, TResponse> : IRequestHandler
         where TRequest : class, IRequest
         where TResponse : class, IResponse
     {
         TResponse Handle(TRequest request);
+        Task<TResponse> HandleAsync(TRequest request);
     }
 
     public abstract class RequestHandlerAbstract<TRequest, TResponse>
@@ -33,6 +35,16 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
             }
 
             return Handle(concreteRequest);
+        }
+
+        public async Task<IResponse> HandleAsync(IRequest request)
+        {
+            return await Task.Run(() => Handle(request));
+        }
+
+        public async Task<TResponse> HandleAsync(TRequest request)
+        {
+            return await Task.Run(() =>  Handle(request));
         }
 
         public TResponse Handle(TRequest request)
