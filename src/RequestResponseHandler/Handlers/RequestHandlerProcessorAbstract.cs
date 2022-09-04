@@ -34,7 +34,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
                     break;
 
                 case ExecutionStrategy.Parallel:
-                    responseBlock.Add(ExecuteInParallel(requestHandlers).ToArray());
+                    responseBlock.Add(ExecuteInParallel(requestHandlers).Result.ToArray());
                     break;
                 default:
                     throw new ArgumentException($"Unknown Execution Strategy, {requestBlock.ExecutionStrategy}");
@@ -62,19 +62,32 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
             return responses;
         }
 
-        private IEnumerable<IResponse> ExecuteInParallel
+        private async Task<IEnumerable<IResponse>> ExecuteInParallel
             (IEnumerable<(IRequest request, IRequestHandler requestHandler)> requestHandlers)
         {
-            //TODO: Implement parallel execution
+            var responses = new List<IResponse>();
 
-            throw new NotImplementedException();
+            var tasks = new List<Task<IResponse>>();
+
+            foreach (var rh in requestHandlers)
+            {
+                var request = rh.request;
+                request.StartUtcTime = DateTime.UtcNow;
+
+                tasks.Add(rh.requestHandler.HandleAsync(request));
+            }
+
+            await Task.WhenAll(tasks);
+
+            foreach (var task in tasks)
+            {
+                var response = task.Result;
+                response.CompletedUtcTime = DateTime.UtcNow;
+                responses.Add(response);
+            }
+
+            return responses;
         }
-
-        //private async Task<IResponse> ExecuteRequestHandlerAsync(IRequest request, IRequestHandler requestHandler)
-        //{
-
-        //}
-
 
         private IEnumerable<(IRequest request, IRequestHandler requestHandler)>
             GetRequestHandlers(IEnumerable<IRequest> requests)
