@@ -2,7 +2,7 @@
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
-namespace IntrepidProducts.RequestHandlerTestObjects
+namespace IntrepidProducts.RequestHandlerTestObjects.Responses
 {
     public class RequestHandlerTypeResponse : ResponseAbstract
     {

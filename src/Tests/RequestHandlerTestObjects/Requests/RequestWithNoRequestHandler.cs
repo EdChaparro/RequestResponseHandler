@@ -1,6 +1,6 @@
 ﻿using IntrepidProducts.RequestResponseHandler.Requests;
 
-namespace IntrepidProducts.RequestHandlerTestObjects
+namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {
     public class RequestWithNoRequestHandler : RequestAbstract
     { }
