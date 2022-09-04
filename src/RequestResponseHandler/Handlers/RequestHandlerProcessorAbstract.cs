@@ -35,7 +35,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
                     break;
 
                 case ExecutionStrategy.Parallel:
-                    responseBlock.Add(ExecuteInParallel(requestHandlers).Result.ToArray());
+                    responseBlock.Add(ExecuteInParallelAsync(requestHandlers).Result.ToArray());
                     break;
                 default:
                     throw new ArgumentException($"Unknown Execution Strategy, {requestBlock.ExecutionStrategy}");
@@ -58,7 +58,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
             return responses;
         }
 
-        private async Task<IEnumerable<IResponse>> ExecuteInParallel
+        private async Task<IEnumerable<IResponse>> ExecuteInParallelAsync
             (IEnumerable<(IRequest request, IRequestHandler requestHandler)> requestHandlers)
         {
             var responses = new List<IResponse>();
