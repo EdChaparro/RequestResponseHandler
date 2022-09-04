@@ -5,7 +5,7 @@ using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using IntrepidProducts.RequestResponseHandler.Responses;
 
-namespace IntrepidProducts.RequestHandlerTestObjects
+namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {
     public class CalculateFibonacciSequenceRequest : RequestAbstract
     {
@@ -15,7 +15,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects
     public class CalculateFibonacciSequenceResponse : ResponseAbstract
     {
         public CalculateFibonacciSequenceResponse(CalculateFibonacciSequenceRequest request) : base(request)
-        {}
+        { }
 
         public IEnumerable<BigInteger> Answer { get; set; }
     }

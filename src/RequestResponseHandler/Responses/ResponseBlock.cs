@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IntrepidProducts.RequestResponseHandler.Requests;
 
@@ -19,6 +20,11 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
         public void Add(params IResponse[] responses)
         {
             _responses.AddRange(responses);
+        }
+
+        public T? GetResponseByRequestId<T>(Guid id) where T : class, IResponse
+        {
+            return Responses.FirstOrDefault(x => x.OriginalRequest.Id == id) as T;
         }
     }
 }

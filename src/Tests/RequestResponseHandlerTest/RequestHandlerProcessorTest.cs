@@ -1,6 +1,8 @@
 using System.Linq;
 using IntrepidProducts.IocContainer;
 using IntrepidProducts.RequestHandlerTestObjects;
+using IntrepidProducts.RequestHandlerTestObjects.Requests;
+using IntrepidProducts.RequestHandlerTestObjects.Responses;
 using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -152,6 +154,35 @@ namespace IntrepidProducts.RequestResponseHandlerTest
 
             var lastResponseToFinish = responses[0];    //Should be more CPU intensive request handler
             Assert.AreEqual(typeof(CalculateFibonacciSequenceResponse), lastResponseToFinish.GetType());
+        }
+
+        [TestMethod]
+        public void ShouldExecuteRequestHandlersSeriallyl()
+        {
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
+
+            var rb = new RequestBlock { ExecutionStrategy = ExecutionStrategy.Sequential };
+            rb.Add(new CalculateFibonacciSequenceRequest { NumberOfElements = 5000000 });
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+            rb.Add(new Request01());
+
+            var responseBlock = processor.Process(rb);
+            Assert.IsNotNull(responseBlock);
+
+            Assert.AreEqual(6, responseBlock.Responses.Count());
+
+            var responses = responseBlock.Responses
+                .OrderBy(x => x.CompletedUtcTime)
+                .ToList();
+
+            var firstResponseToFinish = responses[0];    //More CPU intensive request handler finished first due to FIFO
+            Assert.AreEqual(typeof(CalculateFibonacciSequenceResponse), firstResponseToFinish.GetType());
         }
 
         [TestMethod]

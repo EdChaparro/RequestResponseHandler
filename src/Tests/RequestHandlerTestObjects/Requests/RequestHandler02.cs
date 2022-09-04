@@ -1,10 +1,11 @@
-﻿using IntrepidProducts.RequestResponseHandler.Handlers;
+﻿using IntrepidProducts.RequestHandlerTestObjects.Responses;
+using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
 
-namespace IntrepidProducts.RequestHandlerTestObjects
+namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {
     public class Request02 : RequestAbstract
-    {}
+    { }
 
     public class RequestHandler02 : RequestHandlerAbstract<Request02, RequestHandlerTypeResponse>
     {
