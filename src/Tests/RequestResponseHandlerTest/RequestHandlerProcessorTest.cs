@@ -3,7 +3,6 @@ using IntrepidProducts.IocContainer;
 using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Requests;
-using IntrepidProducts.RequestResponseHandler.Responses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -12,15 +11,22 @@ namespace IntrepidProducts.RequestResponseHandlerTest
     [TestClass]
     public class RequestHandlerProcessorTest
     {
+        #region ShouldExecuteRequestHandlerLinkedToRequestType
         [TestMethod]
         public void ShouldExecuteRequestHandlerLinkedToRequestType()
+        {
+            ExecuteRequestHandlerLinkedToRequestType(ExecutionStrategy.Sequential);
+            ExecuteRequestHandlerLinkedToRequestType(ExecutionStrategy.Parallel);
+        }
+
+        private void ExecuteRequestHandlerLinkedToRequestType(ExecutionStrategy executionStrategy)
         {
             var bootStrapper = new Bootstrapper();
             bootStrapper.Bootstrap();
             var iocContainer = bootStrapper.IocContainer;
             var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
-            var rb = new RequestBlock();
+            var rb = new RequestBlock {ExecutionStrategy = executionStrategy};
             rb.Add(new Request01());
 
             var responseBlock = processor.Process(rb);
@@ -35,16 +41,24 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             Assert.AreEqual(typeof(RequestHandler01), response.RequestHandlerType);
             Assert.IsTrue(response.IsSuccessful);
         }
+        #endregion
 
+        #region ShouldExecuteMultipleRequestHandlers
         [TestMethod]
         public void ShouldExecuteMultipleRequestHandlers()
+        {
+            ExecuteMultipleRequestHandlers(ExecutionStrategy.Sequential);
+            ExecuteMultipleRequestHandlers(ExecutionStrategy.Parallel);
+        }
+
+        private void ExecuteMultipleRequestHandlers(ExecutionStrategy executionStrategy)
         {
             var bootStrapper = new Bootstrapper();
             bootStrapper.Bootstrap();
             var iocContainer = bootStrapper.IocContainer;
             var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
-            var rb = new RequestBlock();
+            var rb = new RequestBlock {ExecutionStrategy = executionStrategy};
             rb.Add(new Request01());
             rb.Add(new Request02());
 
@@ -66,6 +80,48 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             Assert.IsTrue(response1.IsSuccessful);
             Assert.IsTrue(response2.IsSuccessful);
         }
+        #endregion
+
+        #region ShouldReportWhenRequestHandlerThrowsException
+        [TestMethod]
+        public void ShouldReportWhenRequestHandlerThrowsException()
+        {
+            ReportWhenRequestHandlerThrowsException(ExecutionStrategy.Sequential);
+            ReportWhenRequestHandlerThrowsException(ExecutionStrategy.Parallel);
+        }
+
+        private void ReportWhenRequestHandlerThrowsException(ExecutionStrategy executionStrategy)
+        {
+            var bootStrapper = new Bootstrapper();
+            bootStrapper.Bootstrap();
+            var iocContainer = bootStrapper.IocContainer;
+            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
+
+            var rb = new RequestBlock {ExecutionStrategy = executionStrategy};
+            rb.Add(new NumericOperationRequest()
+            {
+                Number1 = 4,
+                Number2 = 0,                                    //Divide by zero should...
+                NumberOperation = (n1, n2) => n1 / n2   // throw exception
+            });
+
+            var responseBlock = processor.Process(rb);
+            Assert.IsNotNull(responseBlock);
+
+            var responses = responseBlock.Responses.ToList();
+            Assert.AreEqual(1, responses.Count);
+            var response = responses[0] as NumericOperationResponse;
+            Assert.IsNotNull(response);
+
+            Assert.IsNotNull(response.ErrorInfo);
+            Assert.IsFalse(response.IsSuccessful);
+
+            var errorInfo = response.ErrorInfo;
+
+            Assert.AreEqual("DivideByZeroException", errorInfo.ErrorId);
+            Assert.AreEqual("Attempted to divide by zero.", errorInfo.Message);
+        }
+        #endregion
 
         [TestMethod]
         [ExpectedException(typeof(RequestHandlerNotResolvableException))]
@@ -100,39 +156,6 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             rb.Add(new RequestWithNoRequestHandler());
 
             processor.Process(rb);
-        }
-
-        [TestMethod]
-        public void ShouldReportWhenRequestHandlerThrowsException()
-        {
-            var bootStrapper = new Bootstrapper();
-            bootStrapper.Bootstrap();
-            var iocContainer = bootStrapper.IocContainer;
-            var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
-
-            var rb = new RequestBlock();
-            rb.Add(new NumericOperationRequest()
-            {
-                Number1 = 4,
-                Number2 = 0,                                    //Divide by zero should...
-                NumberOperation = (n1, n2) => n1 / n2   // throw exception
-            });
-
-            var responseBlock = processor.Process(rb);
-            Assert.IsNotNull(responseBlock);
-
-            var responses = responseBlock.Responses.ToList();
-            Assert.AreEqual(1, responses.Count);
-            var response = responses[0] as NumericOperationResponse;
-            Assert.IsNotNull(response);
-
-            Assert.IsNotNull(response.ErrorInfo);
-            Assert.IsFalse(response.IsSuccessful);
-
-            var errorInfo = response.ErrorInfo;
-
-            Assert.AreEqual("DivideByZeroException", errorInfo.ErrorId);
-            Assert.AreEqual("Attempted to divide by zero.", errorInfo.Message);
         }
     }
 }
