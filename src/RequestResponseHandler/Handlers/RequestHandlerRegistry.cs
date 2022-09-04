@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
