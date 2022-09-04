@@ -50,8 +50,8 @@ namespace IntrepidProducts.RequestResponseHandlerTest
         {
             var registry = new RequestHandlerRegistry();
 
-            Assert.AreEqual(3, registry.Register(typeof(Request01).Assembly));
-            Assert.AreEqual(3, registry.RequestHandlerCount);
+            Assert.AreEqual(4, registry.Register(typeof(Request01).Assembly));
+            Assert.AreEqual(4, registry.RequestHandlerCount);
         }
 
 

@@ -1,10 +1,13 @@
 ﻿using IntrepidProducts.RequestResponseHandler.Requests;
+using System;
 
 namespace IntrepidProducts.RequestResponseHandler.Responses
 {
     public interface IResponse
     {
         IRequest OriginalRequest { get; }
+
+        DateTime CompletedUtcTime { get; set; }
 
         ErrorInfo? ErrorInfo { get; set; }
 
@@ -20,6 +23,8 @@ namespace IntrepidProducts.RequestResponseHandler.Responses
         }
 
         public IRequest OriginalRequest { get; }
+
+        public DateTime CompletedUtcTime { get; set; }
 
         public ErrorInfo? ErrorInfo { get; set; }
 
