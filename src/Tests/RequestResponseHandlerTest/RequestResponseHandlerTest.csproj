@@ -37,10 +37,10 @@
 
   <ItemGroup>
     <Reference Include="IntrepidProducts.IoC.MicrosoftStrategy">
-      <HintPath>..\..\..\dependencies\IntrepidProducts.IoC.MicrosoftStrategy.dll</HintPath>
+      <HintPath>..\..\..\dependencies\IntrepidProducts.IoC.MicrosoftStrategy\IntrepidProducts.IoC.MicrosoftStrategy.dll</HintPath>
     </Reference>
     <Reference Include="IntrepidProducts.IocContainer">
-      <HintPath>..\..\..\dependencies\IntrepidProducts.IocContainer.dll</HintPath>
+      <HintPath>..\..\..\dependencies\IntrepidProducts.IoC.MicrosoftStrategy\IntrepidProducts.IocContainer.dll</HintPath>
     </Reference>
   </ItemGroup>
 

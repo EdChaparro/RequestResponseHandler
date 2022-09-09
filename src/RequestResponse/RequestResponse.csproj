@@ -17,4 +17,10 @@
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="IntrepidProducts.Common">
+      <HintPath>..\..\dependencies\IntrepidProducts.Common\IntrepidProducts.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

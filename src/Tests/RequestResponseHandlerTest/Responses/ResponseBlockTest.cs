@@ -10,7 +10,7 @@ using System.Linq;
 namespace IntrepidProducts.RequestResponseHandlerTest.Responses
 {
     [TestClass]
-    public class RequestBlockTest
+    public class ResponseBlockTest
     {
         [TestMethod]
         public void ShouldOfferResponseByRequestId()
