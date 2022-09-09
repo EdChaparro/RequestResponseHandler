@@ -1,7 +1,7 @@
-﻿using System;
+﻿using IntrepidProducts.RequestResponse.Requests;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using IntrepidProducts.RequestResponse.Requests;
 
 namespace IntrepidProducts.RequestResponse.Responses
 {

@@ -1,7 +1,7 @@
-﻿using System;
-using IntrepidProducts.RequestResponse.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
 using IntrepidProducts.RequestResponse.Responses;
 using IntrepidProducts.RequestResponseHandler.Handlers;
+using System;
 
 namespace IntrepidProducts.RequestHandlerTestObjects
 {
@@ -21,7 +21,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects
     public class NumericOperationResponse : ResponseAbstract
     {
         public NumericOperationResponse(NumericOperationRequest request) : base(request)
-        {}
+        { }
 
         public long Answer { get; set; }
     }

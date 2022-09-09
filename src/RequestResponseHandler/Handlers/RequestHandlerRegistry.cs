@@ -1,8 +1,8 @@
-﻿using System;
+﻿using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
@@ -35,7 +35,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
         public Type? GetRequestHandlerTypeFor(Type requestType)
         {
-             _requestHandlers.TryGetValue(requestType, out var requestHandlerType);
+            _requestHandlers.TryGetValue(requestType, out var requestHandlerType);
 
             return requestHandlerType;
         }

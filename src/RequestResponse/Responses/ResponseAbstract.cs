@@ -1,5 +1,5 @@
-﻿using System;
-using IntrepidProducts.RequestResponse.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
+using System;
 
 namespace IntrepidProducts.RequestResponse.Responses
 {

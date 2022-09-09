@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using IntrepidProducts.RequestResponse.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
 using IntrepidProducts.RequestResponse.Responses;
+using System;
+using System.Threading.Tasks;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
@@ -44,7 +44,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
         public async Task<TResponse> HandleAsync(TRequest request)
         {
-            return await Task.Run(() =>  Handle(request));
+            return await Task.Run(() => Handle(request));
         }
 
         public TResponse Handle(TRequest request)
@@ -67,12 +67,12 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
         }
 
         protected virtual void BeforeHandle(TRequest request)
-        {}
+        { }
 
         protected abstract TResponse DoHandle(TRequest request);
 
         public virtual void OnSuccessfulCompletion(TRequest request, TResponse response)
-        {}
+        { }
 
         public virtual TResponse OnFailure(TRequest request, Exception? e)
         {

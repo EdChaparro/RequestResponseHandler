@@ -1,4 +1,3 @@
-using System.Linq;
 using IntrepidProducts.IocContainer;
 using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestHandlerTestObjects.Requests;
@@ -8,6 +7,7 @@ using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Linq;
 
 namespace IntrepidProducts.RequestResponseHandlerTest
 {
@@ -29,7 +29,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             var iocContainer = bootStrapper.IocContainer;
             var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
-            var rb = new RequestBlock {ExecutionStrategy = executionStrategy};
+            var rb = new RequestBlock { ExecutionStrategy = executionStrategy };
             rb.Add(new Request01());
 
             var responseBlock = processor.Process(rb);
@@ -63,7 +63,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             var iocContainer = bootStrapper.IocContainer;
             var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
-            var rb = new RequestBlock {ExecutionStrategy = executionStrategy};
+            var rb = new RequestBlock { ExecutionStrategy = executionStrategy };
             rb.Add(new Request01());
             rb.Add(new Request02());
 
@@ -102,7 +102,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest
             var iocContainer = bootStrapper.IocContainer;
             var processor = iocContainer.Resolve<IRequestHandlerProcessor>();
 
-            var rb = new RequestBlock {ExecutionStrategy = executionStrategy};
+            var rb = new RequestBlock { ExecutionStrategy = executionStrategy };
             rb.Add(new NumericOperationRequest()
             {
                 Number1 = 4,

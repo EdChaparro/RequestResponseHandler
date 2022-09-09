@@ -1,11 +1,11 @@
-﻿using System;
+﻿using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestHandlerTestObjects.Requests;
-using IntrepidProducts.RequestResponseHandler.Handlers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestHandlerTestObjects.Responses;
 using IntrepidProducts.RequestResponse.Requests;
+using IntrepidProducts.RequestResponseHandler.Handlers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 
 namespace IntrepidProducts.RequestResponseHandlerTest.Responses
 {
