@@ -1,4 +1,4 @@
-﻿using IntrepidProducts.RequestResponseHandler.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {

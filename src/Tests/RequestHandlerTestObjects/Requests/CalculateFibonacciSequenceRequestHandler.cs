@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using IntrepidProducts.RequestResponse.Requests;
+using IntrepidProducts.RequestResponse.Responses;
+using IntrepidProducts.RequestResponseHandler.Handlers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using IntrepidProducts.RequestResponseHandler.Handlers;
-using IntrepidProducts.RequestResponseHandler.Requests;
-using IntrepidProducts.RequestResponseHandler.Responses;
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {

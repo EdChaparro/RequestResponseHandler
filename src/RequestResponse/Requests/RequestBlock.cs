@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IntrepidProducts.RequestResponseHandler.Requests
+namespace IntrepidProducts.RequestResponse.Requests
 {
     public enum ExecutionStrategy
     {

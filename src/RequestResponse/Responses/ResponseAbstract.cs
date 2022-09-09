@@ -1,7 +1,7 @@
-﻿using IntrepidProducts.RequestResponseHandler.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
 using System;
 
-namespace IntrepidProducts.RequestResponseHandler.Responses
+namespace IntrepidProducts.RequestResponse.Responses
 {
     public interface IResponse
     {

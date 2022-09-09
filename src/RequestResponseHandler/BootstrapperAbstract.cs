@@ -20,7 +20,7 @@ namespace IntrepidProducts.RequestResponseHandler
             ConfigIoC(IocContainer);
         }
         protected virtual void Init()
-        {}
+        { }
 
         public IIocContainer IocContainer { get; }
 

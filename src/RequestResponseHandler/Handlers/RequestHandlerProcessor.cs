@@ -1,5 +1,5 @@
-﻿using System;
-using IntrepidProducts.IocContainer;
+﻿using IntrepidProducts.IocContainer;
+using System;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {

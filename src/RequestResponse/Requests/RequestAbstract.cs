@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IntrepidProducts.RequestResponseHandler.Requests
+namespace IntrepidProducts.RequestResponse.Requests
 {
     public interface IRequest
     {

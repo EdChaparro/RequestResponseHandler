@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestResponseHandler", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlerTestObjects", "src\Tests\RequestHandlerTestObjects\RequestHandlerTestObjects.csproj", "{3C662A50-0CB0-440E-9451-895E86E91FF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestResponse", "src\RequestResponse\RequestResponse.csproj", "{AF6D6291-381B-47F4-8895-6DBF62FB83BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -29,6 +31,10 @@ Global
 		{3C662A50-0CB0-440E-9451-895E86E91FF8}.Debug|x64.Build.0 = Debug|x64
 		{3C662A50-0CB0-440E-9451-895E86E91FF8}.Release|x64.ActiveCfg = Release|x64
 		{3C662A50-0CB0-440E-9451-895E86E91FF8}.Release|x64.Build.0 = Release|x64
+		{AF6D6291-381B-47F4-8895-6DBF62FB83BD}.Debug|x64.ActiveCfg = Debug|x64
+		{AF6D6291-381B-47F4-8895-6DBF62FB83BD}.Debug|x64.Build.0 = Debug|x64
+		{AF6D6291-381B-47F4-8895-6DBF62FB83BD}.Release|x64.ActiveCfg = Release|x64
+		{AF6D6291-381B-47F4-8895-6DBF62FB83BD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

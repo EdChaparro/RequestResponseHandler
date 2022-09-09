@@ -1,10 +1,10 @@
-﻿using IntrepidProducts.RequestResponseHandler.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
 
-namespace IntrepidProducts.RequestResponseHandler.Responses
+namespace IntrepidProducts.RequestResponse.Responses
 {
     public class EmptyResponse : ResponseAbstract
     {
         public EmptyResponse(IRequest originalRequest, ErrorInfo? errorInfo = null) : base(originalRequest, errorInfo)
-        {}
+        { }
     }
 }
