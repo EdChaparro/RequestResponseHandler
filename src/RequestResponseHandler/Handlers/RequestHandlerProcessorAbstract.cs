@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IntrepidProducts.RequestResponse.Requests;
+using IntrepidProducts.RequestResponse.Responses;
 using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
-using IntrepidProducts.RequestResponseHandler.Requests;
-using IntrepidProducts.RequestResponseHandler.Responses;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {

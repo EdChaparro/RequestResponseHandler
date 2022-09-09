@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using IntrepidProducts.RequestResponseHandler.Requests;
-using IntrepidProducts.RequestResponseHandler.Responses;
+using IntrepidProducts.RequestResponse.Requests;
+using IntrepidProducts.RequestResponse.Responses;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {

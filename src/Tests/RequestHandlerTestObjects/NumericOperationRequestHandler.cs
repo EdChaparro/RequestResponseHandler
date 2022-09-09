@@ -1,7 +1,7 @@
 ﻿using System;
+using IntrepidProducts.RequestResponse.Requests;
+using IntrepidProducts.RequestResponse.Responses;
 using IntrepidProducts.RequestResponseHandler.Handlers;
-using IntrepidProducts.RequestResponseHandler.Requests;
-using IntrepidProducts.RequestResponseHandler.Responses;
 
 namespace IntrepidProducts.RequestHandlerTestObjects
 {

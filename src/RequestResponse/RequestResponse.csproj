@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>IntrepidProducts.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>IntrepidProducts.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
   </PropertyGroup>
@@ -15,18 +16,5 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RequestResponse\RequestResponse.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="IntrepidProducts.IoC.MicrosoftStrategy">
-      <HintPath>..\..\dependencies\IntrepidProducts.IoC.MicrosoftStrategy.dll</HintPath>
-    </Reference>
-    <Reference Include="IntrepidProducts.IocContainer">
-      <HintPath>..\..\dependencies\IntrepidProducts.IocContainer.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 </Project>

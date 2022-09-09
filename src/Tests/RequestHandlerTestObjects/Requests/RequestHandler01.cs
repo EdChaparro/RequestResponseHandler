@@ -1,6 +1,6 @@
 ﻿using IntrepidProducts.RequestHandlerTestObjects.Responses;
+using IntrepidProducts.RequestResponse.Requests;
 using IntrepidProducts.RequestResponseHandler.Handlers;
-using IntrepidProducts.RequestResponseHandler.Requests;
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {

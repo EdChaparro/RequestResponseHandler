@@ -3,9 +3,9 @@ using IntrepidProducts.IocContainer;
 using IntrepidProducts.RequestHandlerTestObjects;
 using IntrepidProducts.RequestHandlerTestObjects.Requests;
 using IntrepidProducts.RequestHandlerTestObjects.Responses;
+using IntrepidProducts.RequestResponse.Requests;
 using IntrepidProducts.RequestResponseHandler.Handlers;
 using IntrepidProducts.RequestResponseHandler.Handlers.Exceptions;
-using IntrepidProducts.RequestResponseHandler.Requests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

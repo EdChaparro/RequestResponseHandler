@@ -1,6 +1,6 @@
-﻿using IntrepidProducts.RequestResponseHandler.Requests;
+﻿using IntrepidProducts.RequestResponse.Requests;
 
-namespace IntrepidProducts.RequestResponseHandler.Responses
+namespace IntrepidProducts.RequestResponse.Responses
 {
     public class EmptyResponse : ResponseAbstract
     {

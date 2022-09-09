@@ -1,4 +1,4 @@
-﻿namespace IntrepidProducts.RequestResponseHandler.Responses
+﻿namespace IntrepidProducts.RequestResponse.Responses
 {
     public class ErrorInfo
     {
