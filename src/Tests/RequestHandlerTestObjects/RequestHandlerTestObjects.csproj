@@ -18,6 +18,9 @@
     <Reference Include="IntrepidProducts.IocContainer">
       <HintPath>..\..\..\dependencies\IntrepidProducts.IoC.MicrosoftStrategy\IntrepidProducts.IocContainer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\..\dependencies\IntrepidProducts.IoC.MicrosoftStrategy\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
