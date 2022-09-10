@@ -11,6 +11,7 @@ namespace IntrepidProducts.RequestResponse.Responses
         {
             OriginalRequestBlock = originalRequestBlock;
         }
+
         public RequestBlock OriginalRequestBlock { get; }
 
         private readonly List<IResponse> _responses = new List<IResponse>();
@@ -26,5 +27,9 @@ namespace IntrepidProducts.RequestResponse.Responses
         {
             return Responses.FirstOrDefault(x => x.OriginalRequest.Id == id) as T;
         }
+
+        public bool HasErrors => Responses.Any(x => !x.IsSuccessful);
+
+        public bool IsSuccessful => Responses.All(x => x.IsSuccessful);
     }
 }

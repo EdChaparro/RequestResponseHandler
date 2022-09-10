@@ -6,6 +6,7 @@ using IntrepidProducts.RequestResponseHandler.Handlers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using IntrepidProducts.RequestResponse.Responses;
 
 namespace IntrepidProducts.RequestResponseHandlerTest.Responses
 {
@@ -106,6 +107,27 @@ namespace IntrepidProducts.RequestResponseHandlerTest.Responses
             Assert.IsNull(response1);
             Assert.IsNull(response2);
             Assert.IsNull(response3);
+        }
+
+        [TestMethod]
+        public void ShouldIndicateWhetherResponsesHaveErrors()
+        {
+            var response1 = new RequestHandlerTypeResponse(new Request01());
+            var response2 = new RequestHandlerTypeResponse(new Request01());
+            var responseWithError
+                = new RequestHandlerTypeResponse(new Request01(),
+                    new ErrorInfo("foo", "bar"));
+
+            var rb = new ResponseBlock(new RequestBlock());
+
+            rb.Add(response1);
+            rb.Add(response2);
+            Assert.IsTrue(rb.IsSuccessful);
+            Assert.IsFalse(rb.HasErrors);
+
+            rb.Add(responseWithError);
+            Assert.IsFalse(rb.IsSuccessful);
+            Assert.IsTrue(rb.HasErrors);
         }
     }
 }
