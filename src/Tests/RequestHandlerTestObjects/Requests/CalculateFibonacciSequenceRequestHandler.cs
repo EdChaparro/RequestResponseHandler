@@ -20,7 +20,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects.Requests
         public IEnumerable<BigInteger> Answer { get; set; }
     }
 
-    public class CalculateFibonacciSequenceRequestHandler : RequestHandlerAbstract<CalculateFibonacciSequenceRequest, CalculateFibonacciSequenceResponse>
+    public class CalculateFibonacciSequenceRequestHandler : AbstractRequestHandler<CalculateFibonacciSequenceRequest, CalculateFibonacciSequenceResponse>
     {
         protected override CalculateFibonacciSequenceResponse DoHandle(CalculateFibonacciSequenceRequest request)
         {

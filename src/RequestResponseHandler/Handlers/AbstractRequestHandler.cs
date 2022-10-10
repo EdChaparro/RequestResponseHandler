@@ -19,7 +19,7 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
         Task<TResponse> HandleAsync(TRequest request);
     }
 
-    public abstract class RequestHandlerAbstract<TRequest, TResponse>
+    public abstract class AbstractRequestHandler<TRequest, TResponse>
         : IRequestHandler<TRequest, TResponse>
         where TRequest : class, IRequest
         where TResponse : class, IResponse
