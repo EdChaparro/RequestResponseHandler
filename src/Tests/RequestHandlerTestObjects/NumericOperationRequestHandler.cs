@@ -27,7 +27,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects
         public long Answer { get; set; }
     }
 
-    public class NumericOperationRequestHandler : RequestHandlerAbstract<NumericOperationRequest, NumericOperationResponse>
+    public class NumericOperationRequestHandler : AbstractRequestHandler<NumericOperationRequest, NumericOperationResponse>
     {
         protected override NumericOperationResponse DoHandle(NumericOperationRequest request)
         {

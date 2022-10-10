@@ -7,7 +7,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects.Requests
     public class Request02 : RequestAbstract
     { }
 
-    public class RequestHandler02 : RequestHandlerAbstract<Request02, RequestHandlerTypeResponse>
+    public class RequestHandler02 : AbstractRequestHandler<Request02, RequestHandlerTypeResponse>
     {
         protected override RequestHandlerTypeResponse DoHandle(Request02 request)
         {
