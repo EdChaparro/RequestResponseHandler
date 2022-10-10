@@ -76,7 +76,11 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
 
         public virtual TResponse OnFailure(TRequest request, Exception? e)
         {
-            var response = Activator.CreateInstance(typeof(TResponse), request)
+            var errorId = e == null ? "Unknown" : e.GetType().Name;
+            var message = e == null ? "Unknown Error" : e.Message;
+            var errorInfo = new ErrorInfo(errorId, message);
+
+            var response = Activator.CreateInstance(typeof(TResponse), request, errorInfo)
                 as TResponse;
 
             if (response == null)   //This should never happen
@@ -84,11 +88,6 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
                 throw new InvalidOperationException
                     ($"Unable to instantiate Response for type {typeof(TResponse).FullName}");
             }
-
-            var errorId = e == null ? "Unknown" : e.GetType().Name;
-            var message = e == null ? "Unknown Error" : e.Message;
-
-            response.ErrorInfo = new ErrorInfo(errorId, message);
 
             return response;
         }

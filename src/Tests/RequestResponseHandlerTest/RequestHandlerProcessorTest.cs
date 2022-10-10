@@ -158,7 +158,7 @@ namespace IntrepidProducts.RequestResponseHandlerTest
         }
 
         [TestMethod]
-        public void ShouldExecuteRequestHandlersSeriallyl()
+        public void ShouldExecuteRequestHandlersSerially()
         {
             var bootStrapper = new Bootstrapper();
             bootStrapper.Bootstrap();
