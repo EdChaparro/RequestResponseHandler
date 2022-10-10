@@ -20,7 +20,8 @@ namespace IntrepidProducts.RequestHandlerTestObjects
 
     public class NumericOperationResponse : ResponseAbstract
     {
-        public NumericOperationResponse(NumericOperationRequest request) : base(request)
+        public NumericOperationResponse(NumericOperationRequest request, ErrorInfo errorInfo = null)
+            : base(request, errorInfo)
         { }
 
         public long Answer { get; set; }
