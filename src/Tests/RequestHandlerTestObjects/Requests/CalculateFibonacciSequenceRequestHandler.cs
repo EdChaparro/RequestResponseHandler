@@ -8,7 +8,7 @@ using System.Numerics;
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {
-    public class CalculateFibonacciSequenceRequest : RequestAbstract
+    public class CalculateFibonacciSequenceRequest : AbstractRequest
     {
         [Range(1,10000000)]
         public int NumberOfElements { get; set; } = 10;

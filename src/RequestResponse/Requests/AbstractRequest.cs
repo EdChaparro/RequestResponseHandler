@@ -8,9 +8,9 @@ namespace IntrepidProducts.RequestResponse.Requests
         DateTime StartUtcTime { get; set; }
     }
 
-    public abstract class RequestAbstract : IRequest
+    public abstract class AbstractRequest : IRequest
     {
-        protected RequestAbstract()
+        protected AbstractRequest()
         {
             Id = Guid.NewGuid();
         }

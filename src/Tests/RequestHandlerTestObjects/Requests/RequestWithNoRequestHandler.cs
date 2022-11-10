@@ -2,6 +2,6 @@
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {
-    public class RequestWithNoRequestHandler : RequestAbstract
+    public class RequestWithNoRequestHandler : AbstractRequest
     { }
 }

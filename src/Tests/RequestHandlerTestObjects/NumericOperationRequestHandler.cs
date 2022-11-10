@@ -5,7 +5,7 @@ using System;
 
 namespace IntrepidProducts.RequestHandlerTestObjects
 {
-    public class NumericOperationRequest : RequestAbstract
+    public class NumericOperationRequest : AbstractRequest
     {
         public NumericOperationRequest()
         {
