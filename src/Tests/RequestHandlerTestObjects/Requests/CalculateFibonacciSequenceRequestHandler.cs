@@ -14,7 +14,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects.Requests
         public int NumberOfElements { get; set; } = 10;
     }
 
-    public class CalculateFibonacciSequenceResponse : ResponseAbstract
+    public class CalculateFibonacciSequenceResponse : AbstractResponse
     {
         public CalculateFibonacciSequenceResponse
             (CalculateFibonacciSequenceRequest request, ErrorInfo? errorInfo)
