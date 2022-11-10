@@ -18,7 +18,7 @@ namespace IntrepidProducts.RequestResponse.Responses
         SecurityError
     }
 
-    public class OperationResponse : ResponseAbstract, IOperationResponse
+    public class OperationResponse : AbstractResponse, IOperationResponse
     {
         public OperationResponse(IRequest originalRequest, ErrorInfo? errorInfo = null)
             : base(originalRequest, errorInfo)

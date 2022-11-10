@@ -5,7 +5,7 @@ using System;
 
 namespace IntrepidProducts.RequestHandlerTestObjects
 {
-    public class NumericOperationRequest : RequestAbstract
+    public class NumericOperationRequest : AbstractRequest
     {
         public NumericOperationRequest()
         {
@@ -18,7 +18,7 @@ namespace IntrepidProducts.RequestHandlerTestObjects
         public Func<int, int, long> NumberOperation { get; set; }
     }
 
-    public class NumericOperationResponse : ResponseAbstract
+    public class NumericOperationResponse : AbstractResponse
     {
         public NumericOperationResponse(NumericOperationRequest request, ErrorInfo errorInfo = null)
             : base(request, errorInfo)

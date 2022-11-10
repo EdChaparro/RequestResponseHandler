@@ -4,7 +4,7 @@ using IntrepidProducts.RequestResponseHandler.Handlers;
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Requests
 {
-    public class Request01 : RequestAbstract
+    public class Request01 : AbstractRequest
     { }
 
     public class RequestHandler01 : AbstractRequestHandler<Request01, RequestHandlerTypeResponse>

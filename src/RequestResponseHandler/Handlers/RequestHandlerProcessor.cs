@@ -3,7 +3,7 @@ using System;
 
 namespace IntrepidProducts.RequestResponseHandler.Handlers
 {
-    public class RequestHandlerProcessor : RequestHandlerProcessorAbstract
+    public class RequestHandlerProcessor : AbstractRequestHandlerProcessor
     {
         public RequestHandlerProcessor
             (IRequestHandlerRegistry requestHandlerRegistry, IIocContainer iocContainer)

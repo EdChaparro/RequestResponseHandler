@@ -4,7 +4,7 @@ using System;
 
 namespace IntrepidProducts.RequestHandlerTestObjects.Responses
 {
-    public class RequestHandlerTypeResponse : ResponseAbstract
+    public class RequestHandlerTypeResponse : AbstractResponse
     {
         public RequestHandlerTypeResponse(IRequest originalRequest, ErrorInfo errorInfo = null) : base(originalRequest, errorInfo)
         { }

@@ -5,7 +5,7 @@ using IntrepidProducts.RequestResponseHandler.Handlers;
 
 namespace IntrepidProducts.RequestHandlerTestObjects
 {
-    public class Bootstrapper : BootstrapperAbstract
+    public class Bootstrapper : AbstractBootstrapper
     {
         public Bootstrapper() : base(new MicrosoftStrategy())
         {
