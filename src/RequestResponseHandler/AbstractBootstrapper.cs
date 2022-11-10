@@ -8,9 +8,9 @@ namespace IntrepidProducts.RequestResponseHandler
         IIocContainer IocContainer { get; }
     }
 
-    public abstract class BootstrapperAbstract : IBootStrapper
+    public abstract class AbstractBootstrapper : IBootStrapper
     {
-        protected BootstrapperAbstract(IIocContainer iocContainer)
+        protected AbstractBootstrapper(IIocContainer iocContainer)
         {
             IocContainer = iocContainer;
         }
