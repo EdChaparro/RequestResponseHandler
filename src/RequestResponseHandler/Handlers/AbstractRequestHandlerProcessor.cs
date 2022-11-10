@@ -13,9 +13,9 @@ namespace IntrepidProducts.RequestResponseHandler.Handlers
         ResponseBlock Process(RequestBlock requestBlock);
     }
 
-    public abstract class RequestHandlerProcessorAbstract : IRequestHandlerProcessor
+    public abstract class AbstractRequestHandlerProcessor : IRequestHandlerProcessor
     {
-        protected RequestHandlerProcessorAbstract(IRequestHandlerRegistry requestHandlerRegistry)
+        protected AbstractRequestHandlerProcessor(IRequestHandlerRegistry requestHandlerRegistry)
         {
             _requestHandlerRegistry = requestHandlerRegistry;
         }
